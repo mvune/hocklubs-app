@@ -1,6 +1,8 @@
 {
   "name": "hocklubs-nl",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "81ff64c6"
 }
