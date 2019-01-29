@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { SQLite, SQLiteObject, SQLiteDatabaseConfig } from '@ionic-native/sqlite/ngx';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -7,17 +8,21 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 export class HockbaseService {
 
   private db: Promise<SQLiteObject>;
+  private config: SQLiteDatabaseConfig = {
+    name: 'hockapp.db',
+    location: 'default',
+    createFromLocation: 1,
+  };
 
-  constructor(private sqlite: SQLite) {
-    this.getDb();
-  }
+  constructor(
+    private platform: Platform,
+    private sqlite: SQLite,
+  ) {}
 
-  getDb() {
+  async getDb() {
     if (!this.db) {
-      this.db = this.sqlite.create({
-        name: 'hockapp.db',
-        location: 'default'
-      });
+      await this.platform.ready();
+      this.db = this.sqlite.create(this.config);
     }
 
     return this.db;

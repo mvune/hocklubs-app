@@ -8,9 +8,9 @@
 
 <ion-content>
     <ion-list>
-      <ion-item>
+      <ion-item *ngFor="let hocklub of hocklubs">
         <ion-icon name="happy" slot="start" color="medium"></ion-icon>
-        <ion-label>Label</ion-label>
+        <ion-label>{{hocklub.name}}</ion-label>
       </ion-item>
     </ion-list>
 </ion-content>
