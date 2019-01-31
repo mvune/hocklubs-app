@@ -22,8 +22,14 @@
             "assets": [
               {
                 "glob": "**/*",
+                "ignore": ["hockapp.db"],
                 "input": "src/assets",
                 "output": "assets"
+              },
+              {
+                "glob": "hockapp.db",
+                "input": "src/assets",
+                "output": "/"
               },
               {
                 "glob": "**/*.svg",
@@ -108,8 +114,14 @@
               },
               {
                 "glob": "**/*",
+                "ignore": ["hockapp.db"],
                 "input": "src/assets",
                 "output": "/assets"
+              },
+              {
+                "glob": "hockapp.db",
+                "input": "src/assets",
+                "output": "/"
               }
             ]
           },

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { from, Observable } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { flatMap, map, take } from 'rxjs/operators';
 import { HockbaseService } from './hockbase.service';
 import { Hocklub } from '../models/hocklub.model';
 
@@ -31,6 +31,8 @@ export class HocklubService {
         }
 
         return hocklubs as Hocklub[];
-      }));
-    }
+      }),
+      take(1)
+    );
+  }
 }
