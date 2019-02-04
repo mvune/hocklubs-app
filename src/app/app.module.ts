@@ -6,12 +6,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { HockbaseService } from './services/hockbase.service';
-import { HocklubService } from './services/hocklub.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,8 +20,7 @@ import { HocklubService } from './services/hocklub.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    HockbaseService,
-    HocklubService
+    NativePageTransitions,
   ],
   bootstrap: [AppComponent]
 })

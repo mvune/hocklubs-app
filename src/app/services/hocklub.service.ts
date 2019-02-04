@@ -16,13 +16,13 @@ export class HocklubService {
     this.db = from(this.hockbaseService.getDb());
   }
 
-  getHocklubs() {
+  getHocklubs(): Observable<Hocklub[]> {
     return this.db.pipe(
       flatMap((dbInstance: SQLiteObject) => {
         return dbInstance.executeSql('SELECT * FROM hocklubs', []);
       }),
       map(data => {
-        const hocklubs = [];
+        const hocklubs: Hocklub[] = [];
 
         for (let i = 0; i < data.rows.length; i++) {
           const hocklub = new Hocklub();
@@ -30,7 +30,22 @@ export class HocklubService {
           hocklubs.push(hocklub);
         }
 
-        return hocklubs as Hocklub[];
+        return hocklubs;
+      }),
+      take(1)
+    );
+  }
+
+  getHocklub(id: string): Observable<Hocklub> {
+    return this.db.pipe(
+      flatMap((dbInstance: SQLiteObject) => {
+        return dbInstance.executeSql('SELECT * FROM hocklubs WHERE id = ?', [id]);
+      }),
+      map(data => {
+        const hocklub = new Hocklub();
+        Object.assign(hocklub, data.rows.item(0));
+
+        return hocklub;
       }),
       take(1)
     );

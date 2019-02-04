@@ -7,8 +7,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-virtual-scroll [items]="hocklubs" approxItemHeight="50px">
-    <ion-item *virtualItem="let hocklub">
+  <ion-virtual-scroll [items]="hocklubs" approxItemHeight="70px">
+    <ion-item *virtualItem="let hocklub" [routerLink]="'/tabs/hocklist/' + hocklub.id" routerDirection="forward"
+              lines="none">
       <ion-thumbnail item-start>
         <ion-img [src]="'https://hockey.nl' + hocklub.logo"></ion-img>
       </ion-thumbnail>
@@ -18,4 +19,7 @@
       </ion-label>
     </ion-item>
   </ion-virtual-scroll>
+  <ion-item *ngIf="!hocklubs" lines="none">
+    <ion-label>Er zijn geen clubs om weer te geven.</ion-label>
+  </ion-item>
 </ion-content>
