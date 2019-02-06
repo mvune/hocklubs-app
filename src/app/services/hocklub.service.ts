@@ -12,42 +12,54 @@ export class HocklubService {
 
   private db: Observable<SQLiteObject>;
 
+  private readonly selectQuery = 'SELECT * FROM hocklubs';
+
   constructor(private hockbaseService: HockbaseService) {
     this.db = from(this.hockbaseService.getDb());
   }
 
-  getHocklubs(): Observable<Hocklub[]> {
+  getAll(): Observable<Hocklub[]> {
     return this.db.pipe(
       flatMap((dbInstance: SQLiteObject) => {
-        return dbInstance.executeSql('SELECT * FROM hocklubs', []);
+        return dbInstance.executeSql(this.selectQuery, []);
       }),
-      map(data => {
-        const hocklubs: Hocklub[] = [];
-
-        for (let i = 0; i < data.rows.length; i++) {
-          const hocklub = new Hocklub();
-          Object.assign(hocklub, data.rows.item(i));
-          hocklubs.push(hocklub);
-        }
-
-        return hocklubs;
-      }),
+      map(this.dataToHocklubs),
       take(1)
     );
   }
 
-  getHocklub(id: string): Observable<Hocklub> {
+  getById(id: string): Observable<Hocklub> {
     return this.db.pipe(
       flatMap((dbInstance: SQLiteObject) => {
-        return dbInstance.executeSql('SELECT * FROM hocklubs WHERE id = ?', [id]);
+        return dbInstance.executeSql(this.selectQuery + ' WHERE id = ?', [id]);
       }),
-      map(data => {
-        const hocklub = new Hocklub();
-        Object.assign(hocklub, data.rows.item(0));
-
-        return hocklub;
-      }),
+      map(this.dataToHocklubs),
+      map((hocklubs: Hocklub[]) => hocklubs[0]),
       take(1)
     );
+  }
+
+  search(term: string): Observable<Hocklub[]> {
+    return this.db.pipe(
+      flatMap((dbInstance: SQLiteObject) => {
+        term = `%${term}%`;
+        const query = this.selectQuery + ' WHERE name LIKE ? OR city LIKE ?';
+        return dbInstance.executeSql(query, [term]);
+      }),
+      map(this.dataToHocklubs),
+      take(1)
+    );
+  }
+
+  private dataToHocklubs(data: any): Hocklub[] {
+    const hocklubs: Hocklub[] = [];
+
+    for (let i = 0; i < data.rows.length; i++) {
+      const hocklub = new Hocklub();
+      Object.assign(hocklub, data.rows.item(i));
+      hocklubs.push(hocklub);
+    }
+
+    return hocklubs;
   }
 }

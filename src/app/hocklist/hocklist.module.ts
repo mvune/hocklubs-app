@@ -4,16 +4,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HocklistPage } from './hocklist.page';
-import { HockdetailComponent } from './hockdetail/hockdetail.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HocklistPage
-  },
-  {
-    path: ':id',
-    component: HockdetailComponent
   }
 ];
 
@@ -24,6 +19,6 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [HocklistPage, HockdetailComponent]
+  declarations: [HocklistPage]
 })
 export class HocklistPageModule {}

@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
+
 import { Hocklub } from 'src/app/models/hocklub.model';
 import { HocklubService } from 'src/app/services/hocklub.service';
 
 @Component({
   selector: 'app-hockdetail',
-  templateUrl: './hockdetail.component.html',
-  styleUrls: ['./hockdetail.component.scss']
+  templateUrl: './hockdetail.page.html',
+  styleUrls: ['./hockdetail.page.scss'],
 })
-export class HockdetailComponent implements OnInit {
+export class HockdetailPage implements OnInit {
 
   private hocklub: Hocklub = new Hocklub;
   private transitionOptions: NativeTransitionOptions = {
     direction: 'left',
-    duration: 400,
+    duration: 600,
     slowdownfactor: -1,
-    fixedPixelsBottom: 57,
   };
 
   constructor(
@@ -27,7 +27,9 @@ export class HockdetailComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.hocklubService.getHocklub(id).subscribe(hocklub => this.hocklub = hocklub);
+
+    this.hocklubService.getById(id)
+      .subscribe(hocklub => this.hocklub = hocklub);
   }
 
   ionViewWillEnter() {

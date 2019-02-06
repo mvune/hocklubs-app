@@ -5,6 +5,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { HeaderColor } from '@ionic-native/header-color/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 
@@ -21,6 +22,7 @@ import { AppComponent } from './app.component';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativePageTransitions,
+    HeaderColor,
   ],
   bootstrap: [AppComponent]
 })
