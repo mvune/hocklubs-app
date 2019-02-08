@@ -18,16 +18,6 @@ export class HocklubService {
     this.db = from(this.hockbaseService.getDb());
   }
 
-  getAll(): Observable<Hocklub[]> {
-    return this.db.pipe(
-      flatMap((dbInstance: SQLiteObject) => {
-        return dbInstance.executeSql(this.selectQuery, []);
-      }),
-      map(this.dataToHocklubs),
-      take(1)
-    );
-  }
-
   getById(id: string): Observable<Hocklub> {
     return this.db.pipe(
       flatMap((dbInstance: SQLiteObject) => {
@@ -39,12 +29,16 @@ export class HocklubService {
     );
   }
 
-  search(term: string): Observable<Hocklub[]> {
+  getAll(searchTerm?: string): Observable<Hocklub[]> {
     return this.db.pipe(
       flatMap((dbInstance: SQLiteObject) => {
-        term = `%${term}%`;
-        const query = this.selectQuery + ' WHERE name LIKE ? OR city LIKE ?';
-        return dbInstance.executeSql(query, [term]);
+        if (searchTerm) {
+          const term = `%${searchTerm}%`;
+          const query = this.selectQuery + ' WHERE name LIKE ? OR city LIKE ?';
+          return dbInstance.executeSql(query, [term, term]);
+        } else {
+          return dbInstance.executeSql(this.selectQuery, []);
+        }
       }),
       map(this.dataToHocklubs),
       take(1)

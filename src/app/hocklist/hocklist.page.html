@@ -1,15 +1,17 @@
 <ion-header>
-  <ion-searchbar (ionInput)="onInput($event)"
+  <ion-searchbar (ionChange)="onChange($event)"
                  (keyup.enter)="onEnter($event)"
+                 debounce="600"
                  placeholder="Zoeken">
   </ion-searchbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-virtual-scroll [items]="hocklubs" approxItemHeight="70px">
+  <ion-virtual-scroll *ngIf="hocklubs.length" [items]="hocklubs"
+                      approxItemHeight="70px" [@slideInOut]="loadingState">
     <ion-item *virtualItem="let hocklub"
               [routerLink]="'/hockdetail/' + hocklub.id" routerDirection="forward"
-              lines="none" detail>
+              lines="none">
       <ion-thumbnail item-start>
         <ion-img [src]="'https://hockey.nl' + hocklub.logo"></ion-img>
       </ion-thumbnail>
@@ -20,7 +22,7 @@
     </ion-item>
   </ion-virtual-scroll>
   
-  <ion-item *ngIf="!hocklubs.length" lines="none">
+  <ion-item *ngIf="!hocklubs.length" lines="none" text-center>
     <ion-label>Er zijn geen clubs om weer te geven.</ion-label>
   </ion-item>
 </ion-content>
