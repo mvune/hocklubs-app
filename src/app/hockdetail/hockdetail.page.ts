@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 
 import { Hocklub } from 'src/app/models/hocklub.model';
 import { HocklubService } from 'src/app/services/hocklub.service';
@@ -15,14 +16,18 @@ export class HockdetailPage implements OnInit {
   private hocklub: Hocklub = new Hocklub;
   private transitionOptions: NativeTransitionOptions = {
     direction: 'left',
-    duration: 600,
+    duration: 500,
     slowdownfactor: -1,
+  };
+  private readonly iabOptions: InAppBrowserOptions = {
+    location: 'no',
   };
 
   constructor(
     private route: ActivatedRoute,
     private hocklubService: HocklubService,
     private pageTransitions: NativePageTransitions,
+    private iab: InAppBrowser,
   ) {}
 
   ngOnInit() {
@@ -30,6 +35,10 @@ export class HockdetailPage implements OnInit {
 
     this.hocklubService.getById(id)
       .subscribe(hocklub => this.hocklub = hocklub);
+  }
+
+  goToWebsite() {
+    this.iab.create('https://' + this.hocklub.website, '_blank', this.iabOptions);
   }
 
   ionViewWillEnter() {

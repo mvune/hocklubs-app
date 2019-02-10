@@ -1,0 +1,38 @@
+ion-toolbar {
+    --background: var(--ion-color-primary);
+}
+
+ion-card {
+    margin-bottom: 50px;
+}
+
+ion-card-header {
+    padding-bottom: 8px;
+}
+
+ion-img {
+    height: 120px;
+    width: auto;
+}
+
+ion-item {
+    --padding-start: 10px;
+}
+
+ion-icon {
+    margin-right: 20px;
+}
+
+ion-note {
+    --color: var(--ion-color-secondary);
+}
+
+ion-label {
+    margin-top: 6px;
+    margin-bottom: 5px;
+}
+
+.sc-ion-card-md-h, .sc-ion-card-md-s,
+.sc-ion-card-ios-h, .sc-ion-card-ios-s {
+    box-shadow: none;
+}

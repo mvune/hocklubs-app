@@ -34,7 +34,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.headerColor.tint('#ffffff');
+      this.headerColor.tint('#cde9ab');
       this.registerBackButtonAction();
     });
   }
