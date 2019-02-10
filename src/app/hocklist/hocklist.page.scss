@@ -1,9 +1,5 @@
-ion-searchbar {
-    --color: var(--ion-color-tertiary);
-    --icon-color: var(--ion-color-secondary);
-}
-
 ion-virtual-scroll {
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 
@@ -22,10 +18,4 @@ ion-img {
 
 ion-label {
     margin: 8px 0 7px;
-}
-
-// Remove shadow from ion-header.
-.header-md:after, .header-ios:after {
-    height: 0;
-    background-image: none;
 }

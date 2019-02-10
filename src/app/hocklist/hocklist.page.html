@@ -1,12 +1,14 @@
 <ion-header>
-  <ion-searchbar (ionChange)="onChange($event)"
-                 (keyup.enter)="onEnter($event)"
-                 debounce="600"
-                 placeholder="Zoeken">
-  </ion-searchbar>
+  <ion-toolbar>
+    <ion-searchbar (ionChange)="onChange($event)"
+                  (keyup.enter)="onEnter($event)"
+                  debounce="600"
+                  placeholder="Zoeken">
+    </ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content>
   <ion-virtual-scroll *ngIf="hocklubs.length" [items]="hocklubs"
                       approxItemHeight="70px" [@slideInOut]="loadingState">
     <ion-item *virtualItem="let hocklub"

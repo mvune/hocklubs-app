@@ -9,3 +9,13 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+ion-toolbar {
+    --color: var(--ion-color-tertiary-shade);
+    --background: var(--ion-color-primary);
+}
+
+ion-searchbar {
+    --color: var(--ion-color-tertiary);
+    --icon-color: var(--ion-color-secondary);
+}
