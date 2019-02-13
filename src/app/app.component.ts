@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
+import { timer } from 'rxjs';
 
 import { ToastOptions } from '@ionic/core';
 import { Platform, ToastController } from '@ionic/angular';
@@ -33,8 +34,8 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
-      this.headerColor.tint('#cde9ab');
+      timer(1000).subscribe(() => this.splashScreen.hide());
+      this.headerColor.tint('#6f9634');
       this.registerBackButtonAction();
     });
   }
