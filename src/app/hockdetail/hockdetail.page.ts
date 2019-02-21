@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 
 import { Hocklub } from 'src/app/models/hocklub.model';
-import { HocklubService } from 'src/app/services/hocklub.service';
+import { HocklubService, DEFAULT_LOGO } from 'src/app/services/hocklub.service';
+import { flatMap, filter } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-hockdetail',
@@ -12,7 +14,9 @@ import { HocklubService } from 'src/app/services/hocklub.service';
 })
 export class HockdetailPage implements OnInit {
 
-  private hocklub: Hocklub = new Hocklub;
+  readonly defaultLogo = DEFAULT_LOGO;
+
+  private hocklub: Hocklub;
 
   private readonly iabOptions: InAppBrowserOptions = {
     location: 'no',
@@ -25,10 +29,13 @@ export class HockdetailPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-
-    this.hocklubService.getById(id)
-      .subscribe(hocklub => this.hocklub = hocklub);
+    this.route.paramMap.pipe(
+      flatMap(params => of(parseInt(params.get('id'), 10))),
+      filter(id => id > 0),
+      flatMap(id => this.hocklubService.getById(id)),
+    ).subscribe(hocklub => {
+      this.hocklub = hocklub;
+    });
   }
 
   goToWebsite() {

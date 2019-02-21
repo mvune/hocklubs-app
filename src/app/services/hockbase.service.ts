@@ -19,7 +19,7 @@ export class HockbaseService {
     private sqlite: SQLite,
   ) {}
 
-  async getDb() {
+  async getDb(): Promise<SQLiteObject> {
     if (!this.db) {
       await this.platform.ready();
       this.db = this.sqlite.create(this.config);

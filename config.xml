@@ -87,5 +87,11 @@
     <plugin name="cordova-sqlite-ext" spec="2.3.0" />
     <plugin name="cordova-plugin-headercolor" spec="1.0.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
-    <engine name="android" spec="7.1.4" />
+    <plugin name="cordova-plugin-googlemaps" spec="2.5.0">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyC..." />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyC..." />
+        <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
+    </plugin>
+    <engine name="android" spec="~7.1.4" />
 </widget>

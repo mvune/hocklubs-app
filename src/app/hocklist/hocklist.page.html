@@ -12,10 +12,10 @@
   <ion-virtual-scroll *ngIf="hocklubs.length" [items]="hocklubs"
                       approxItemHeight="70px" [@slideInOut]="loadingState">
     <ion-item *virtualItem="let hocklub"
-              [routerLink]="'/hockdetail/' + hocklub.id" routerDirection="forward"
+              [routerLink]="['/tabs/hockdetail', hocklub.id]" routerDirection="forward"
               lines="none">
       <ion-thumbnail item-start>
-        <ion-img [src]="'https://hockey.nl' + hocklub.logo"></ion-img>
+        <ion-img [src]="hocklub.logo"></ion-img>
       </ion-thumbnail>
       <ion-label>
         <h2>{{ hocklub.name }}</h2>

@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { HeaderColor } from '@ionic-native/header-color/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { AppComponent } from './app.component';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     HeaderColor,
     InAppBrowser,
+    GoogleMaps,
   ],
   bootstrap: [AppComponent]
 })

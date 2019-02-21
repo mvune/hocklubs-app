@@ -1,19 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{ hocklub.name }}</ion-title>
+    <ion-title *ngIf="hocklub">{{ hocklub.name }}</ion-title>
+    <ion-title *ngIf="!hocklub">Club</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card *ngIf="hocklub">
     <ion-card-header *ngIf="hocklub.logo">
-      <ion-img [src]="'https://hockey.nl' + hocklub.logo" alt="logo"></ion-img>
+      <ion-img [src]="hocklub.logo" alt="Clublogo {{ hocklub.name }}"></ion-img>
     </ion-card-header>
 
-    <ion-item *ngIf="hocklub.street">
+    <ion-item *ngIf="hocklub.street" [routerLink]="'/tabs/hockmap/' + hocklub.id"
+              routerDirection="forward" detail>
       <ion-icon name="pin" slot="start"></ion-icon>
       <ion-label text-wrap>
         <ion-note>Adres</ion-note>
@@ -70,6 +69,18 @@
       <ion-label text-wrap>
         <ion-note>Leden</ion-note>
         <br />{{ hocklub.members }}
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="!hocklub">
+    <ion-card-header>
+      <ion-img id="no-hocklub-card" [src]="defaultLogo"></ion-img>
+    </ion-card-header>
+
+    <ion-item id="no-hocklub-message" lines="none">
+      <ion-label text-wrap>
+        Selecteer een club van de lijst of kaart om details daarvan hier weer te geven.
       </ion-label>
     </ion-item>
   </ion-card>

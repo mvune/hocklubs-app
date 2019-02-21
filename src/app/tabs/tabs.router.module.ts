@@ -13,6 +13,10 @@ const routes: Routes = [
         loadChildren: '../hocklist/hocklist.module#HocklistPageModule'
       },
       {
+        path: 'hockdetail',
+        loadChildren: '../hockdetail/hockdetail.module#HockdetailPageModule'
+      },
+      {
         path: 'hockmap',
         loadChildren: '../hockmap/hockmap.module#HockmapPageModule'
       },

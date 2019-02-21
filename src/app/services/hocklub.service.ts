@@ -18,12 +18,12 @@ export class HocklubService {
     this.db = from(this.hockbaseService.getDb());
   }
 
-  getById(id: string): Observable<Hocklub> {
+  getById(id: number): Observable<Hocklub> {
     return this.db.pipe(
       flatMap((dbInstance: SQLiteObject) => {
         return dbInstance.executeSql(this.selectQuery + ' WHERE id = ?', [id]);
       }),
-      map(this.dataToHocklubs),
+      map(dataToHocklubs),
       map((hocklubs: Hocklub[]) => hocklubs[0]),
       take(1)
     );
@@ -40,20 +40,35 @@ export class HocklubService {
           return dbInstance.executeSql(this.selectQuery, []);
         }
       }),
-      map(this.dataToHocklubs),
+      map(dataToHocklubs),
       take(1)
     );
   }
+}
 
-  private dataToHocklubs(data: any): Hocklub[] {
-    const hocklubs: Hocklub[] = [];
+export const DEFAULT_LOGO = window.location.origin + '/assets/icons/default-logo.jpg';
 
-    for (let i = 0; i < data.rows.length; i++) {
-      const hocklub = new Hocklub();
-      Object.assign(hocklub, data.rows.item(i));
-      hocklubs.push(hocklub);
-    }
+function dataToHocklubs(data: any): Hocklub[] {
+  const hocklubs: Hocklub[] = [];
 
-    return hocklubs;
+  for (let i = 0; i < data.rows.length; i++) {
+    const hocklub = new Hocklub();
+    Object.assign(hocklub, data.rows.item(i));
+    hocklub.logo = logoToLogoUrl(hocklub.logo);
+    hocklubs.push(hocklub);
   }
+
+  return hocklubs;
+}
+
+function logoToLogoUrl(logo: string): string {
+  let logoUrl: string;
+
+  if (logo) {
+    logoUrl = 'https://hockey.nl' + logo;
+  } else {
+    logoUrl = DEFAULT_LOGO;
+  }
+
+  return logoUrl;
 }
