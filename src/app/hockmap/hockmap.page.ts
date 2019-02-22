@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { GoogleMaps, GoogleMap, GoogleMapOptions, LatLng, CameraPosition,
   GoogleMapsEvent, HtmlInfoWindow } from '@ionic-native/google-maps/ngx';
@@ -15,6 +15,7 @@ import { HocklubService } from '../services/hocklub.service';
 export class HockmapPage implements OnInit {
 
   private map: GoogleMap;
+  private activeHocklubId: number;
   private readonly mapOptions: GoogleMapOptions = {
     camera: {
       target: {
@@ -35,11 +36,12 @@ export class HockmapPage implements OnInit {
   private readonly markerInfoWindowTemplate = '<div style="padding: 0 16px 0 6px;">' +
     '<h3 style="color: var(--ion-color-secondary);">[name]</h3>' +
     '<p>[street]<br />' +
-    '[postal_code] [city]' +
-    '</p></div>';
+    '[postal_code] [city]<br />' +
+    '<ion-button onclick="document.getElementById(\'info-window-proxy-button\').click()"' +
+    ' style="text-transform: initial; margin: 8px 0 0;">Bekijk</ion-button><br />' +
+    '&nbsp;</p></div>';
   private readonly markerInfoWindowCssOptions = {
-    width: '220px',
-    height: '100%',
+    width: '200px',
     margin: '-4px 0',
   };
 
@@ -47,6 +49,7 @@ export class HockmapPage implements OnInit {
     private platform: Platform,
     private hocklubService: HocklubService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   async ngOnInit() {
@@ -66,6 +69,10 @@ export class HockmapPage implements OnInit {
       };
       this.map.moveCamera(cameraPosition);
     });
+  }
+
+  onInfoWindowButtonClick() {
+    this.router.navigate(['/tabs/hockdetail', this.activeHocklubId]);
   }
 
   private loadMap() {
@@ -96,6 +103,7 @@ export class HockmapPage implements OnInit {
           const infoWindow = new HtmlInfoWindow;
           infoWindow.setContent(content, this.markerInfoWindowCssOptions);
           infoWindow.open(marker);
+          this.activeHocklubId = club.id;
         });
       }
     });
