@@ -16,7 +16,7 @@ export class HockdetailPage implements OnInit {
 
   readonly defaultLogo = DEFAULT_LOGO;
 
-  private hocklub: Hocklub;
+  hocklub: Hocklub;
 
   private readonly iabOptions: InAppBrowserOptions = {
     location: 'no',

@@ -11,7 +11,8 @@ import { slideInOutAnimation } from '../animations/slide-in-out.animation';
 })
 export class HocklistPage implements OnInit {
 
-  private hocklubs: Hocklub[] = [];
+  hocklubs: Hocklub[] = [];
+
   private loadingState = 'not-loading'; // 'loading' | 'not-loading'
 
   constructor(

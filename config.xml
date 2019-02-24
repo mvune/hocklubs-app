@@ -2,10 +2,9 @@
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Hocklubs</name>
     <description>Vind clubs snel en gemakkelijk.</description>
-    <author href="https://github.com/mvune">mvune</author>
+    <author email="mvune01@gmail.com" href="https://github.com/mvune">mvune</author>
     <content src="index.html" />
     <access origin="*" />
-    <allow-navigation href="http://192.168.1.65:8100" sessionid="6e877925" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
@@ -87,11 +86,11 @@
     <plugin name="cordova-sqlite-ext" spec="2.3.0" />
     <plugin name="cordova-plugin-headercolor" spec="1.0.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
-    <plugin name="cordova-plugin-googlemaps" spec="2.5.0">
+    <plugin name="cordova-plugin-googlemaps" spec="2.5.1">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyC..." />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyC..." />
         <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
-    <engine name="android" spec="~7.1.4" />
+    <engine name="android" spec="7.1.4" />
 </widget>
