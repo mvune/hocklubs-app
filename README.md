@@ -2,9 +2,7 @@
 
 Mobile app.
 
-<img src="./screenshots/screenshot_1.png" width="20%">
-<img src="./screenshots/screenshot_2.png" width="20%">
-<img src="./screenshots/screenshot_3.png" width="20%">
+<img src="./screenshots/screenshot_1.png" width="20%"> <img src="./screenshots/screenshot_2.png" width="20%"> <img src="./screenshots/screenshot_3.png" width="20%">
 
 ## Supported Platforms
 + Android
