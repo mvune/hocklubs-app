@@ -9,4 +9,4 @@ Mobile app.
 + IOS
 
 ## About
-This app was primarily built for educational purposes and is (therefore?) not available in Play Store nor App Store.
+This app was primarily built for educational purposes and is not available in Play Store nor App Store.
